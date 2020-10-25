@@ -1,0 +1,54 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.1'
+	}
+}
+plugins {
+	id 'org.springframework.boot' version '2.3.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id "io.freefair.lombok" version "5.1.1"
+	id 'java'
+}
+
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+group = 'com.account.demo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+test {
+	useJUnitPlatform()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	compile("org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE")
+	compile("org.springframework.boot:spring-boot-starter-tomcat:1.5.8.RELEASE")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
+
+	//Swagger
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+	testCompile 'org.junit.jupiter:junit-jupiter-params:5.2.0'
+	testCompile 'org.mockito:mockito-core:2.+'
+	testCompile 'org.mockito:mockito-junit-jupiter:2.18.3'
+	testCompile ('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'junit', module: 'junit'
+		exclude group: 'org.junit.vintage'
+	}
+	testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '5.3.4.RELEASE'
+}
+
